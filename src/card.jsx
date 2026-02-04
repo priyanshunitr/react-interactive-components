@@ -21,7 +21,7 @@ function Card() {
     }
   }
   return (
-    <>
+    <div className="card">
     <button className="close" onClick={() => setIsOpen((prev) => !prev)}>&times;</button>
       {isOpen && (
         <div className="steps">
@@ -49,7 +49,7 @@ function Card() {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 }
 

@@ -1,37 +1,32 @@
 import { useState } from "react";
 
 function App() {
-  const date = new Date().toString();
-
-  function stepsForward(){
-    setSteps(prev=>(prev+1))
-  }
-
-  function stepsBackward(){
-    if (steps>1)
-      setSteps(prev=>(prev-1))
-  }
-
-  function countBackward(){
-      setCount(prev=>(prev-steps))
-  }
-
-  function countBackward(){
-      setCount(prev=>(prev-steps))
-  }
-
-  function countForward(){
-      setCount(prev=>(prev+steps))
-  }
-
-
-
   const [count, setCount] = useState(0);
   const [steps, setSteps] = useState(1);
 
+  const date = new Date();
+  const futureDate = new Date();
+  futureDate.setDate(date.getDate() + count);
+
+  function stepsForward() {
+    setSteps((prev) => prev + 1);
+  }
+
+  function stepsBackward() {
+    if (steps > 1) setSteps((prev) => prev - 1);
+  }
+
+  function countBackward() {
+    setCount((prev) => prev - steps);
+  }
+
+  function countForward() {
+    setCount((prev) => prev + steps);
+  }
+
   return (
     <>
-      <h1>Welcome to React {date}</h1>
+      <h1>Welcome to React {date.toDateString()}</h1>
 
       <div>
         <button onClick={stepsBackward}>-</button>
@@ -45,7 +40,7 @@ function App() {
         <button onClick={countForward}>+</button>
       </div>
 
-      <div>{`${count} days from ${date}`}</div>
+      <div>{`${count} days from ${date.toDateString()} is ${futureDate.toDateString()}`}</div>
     </>
   );
 }
