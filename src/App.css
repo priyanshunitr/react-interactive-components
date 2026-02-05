@@ -80,6 +80,7 @@ input {
   flex-direction: column;
   gap: 3.2rem;
   align-items: center;
+  overflow: auto;
 }
 
 .actions button,
@@ -94,7 +95,7 @@ input {
 .list ul {
   list-style: none;
   width: 80%;
-  overflow: scroll;
+  width: 80%;
 
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -129,4 +130,8 @@ input[type="checkbox"] {
   text-align: center;
   font-weight: 700;
   padding: 3.2rem 0;
+}
+
+.packed {
+  text-decoration: line-through;
 }
