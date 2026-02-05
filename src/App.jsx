@@ -7,12 +7,13 @@ const initialItems = [
 ];
 
 function App() {
+  const [items, setItems] = useState(initialItems);
   return (
     <>
       <div className="app">
         <Logo />
-        <Form />
-        <PackingList />
+        <Form items={items} setItems={setItems} />
+        <PackingList items={items} setItems={setItems} />
         <Stats />
       </div>
     </>
@@ -27,7 +28,7 @@ function Logo() {
 }
 // ___________________________________________________________________________________________________;
 
-function Form() {
+function Form({ items, setItems }) {
   const [description, setDescription] = useState("");
   const [quantity, setQuantity] = useState(1);
 
@@ -37,10 +38,11 @@ function Form() {
       description,
       quantity,
       packed: false,
-      id: initialItems.length + 1,
+      id: items.length + 1,
     };
     console.log(newItem);
-    initialItems.push(newItem);
+    setItems([...items, newItem]);
+
 
     setDescription("");
     setQuantity(1);
@@ -68,11 +70,11 @@ function Form() {
 }
 // ___________________________________________________________________________________________________;
 
-function PackingList() {
+function PackingList({ items, setItems }) {
   return (
     <div className="list">
       <ul>
-        {initialItems.map((item) => (
+        {items.map((item) => (
           <Item data={item} key={item.id} />
         ))}
       </ul>
@@ -82,12 +84,13 @@ function PackingList() {
 // ___________________________________________________________________________________________________;
 
 function Item({ data }) {
+  const [className, setClassName] = useState(data.packed);
   return (
     <li>
-      <span className={data.packed ? "packed" : ""}>
+      <span className={className ? "packed" : ""}>
         {data.quantity} {data.description}
       </span>
-      <button>❌</button>
+      <button onClick={() => {setClassName(!className)}}>❌</button>
     </li>
   );
 }
